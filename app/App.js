@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import Title from './components/Title.js';
 import TaskList from './components/TaskList.js';
 import Input from './components/Input.js';
+import './index.css'
+
 
 
 class App extends React.Component {

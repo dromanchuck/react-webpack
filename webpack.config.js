@@ -1,4 +1,4 @@
-var path = require('path');
+const path = require('path');
 
 module.exports = {
     entry: './app/App',
@@ -12,12 +12,23 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.js?$/,
                 exclude: [/node_modules/],
                 use: [{
-                    loader: "babel-loader",
+                    loader: 'babel-loader',
                     options: {
-                        presets: ["env", "react"]
+                        presets: ['env', 'react']
+                    }
+                }]
+            },
+            {
+                test:/\.css?$/,
+                use:[{
+                    loader:'style-loader'
+                },{
+                    loader:'css-loader',
+                    options: {
+                        modules: true
                     }
                 }]
             }

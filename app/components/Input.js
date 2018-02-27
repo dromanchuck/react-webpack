@@ -9,9 +9,9 @@ class Input extends React.Component {
 
         return (
             <div className='input'>
-                <textarea placeholder={placeholders[randomNumber]}
+                <input placeholder={placeholders[randomNumber]}
                           ref={node => {input = node;}
-                          }></textarea>
+                          }/>
                 <button onClick={()=>{
                     this.props.addTodo(input.value);
                     input.value = '';
