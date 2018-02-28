@@ -23,6 +23,7 @@ class App extends React.Component {
         if(todo.text.length===0) {
             alert('You must be doing something wrong:)');
         } else {
+            console.log(this.state.data);
             this.state.data.push(todo);
             this.setState({data: this.state.data});
         }

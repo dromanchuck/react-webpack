@@ -997,6 +997,7 @@ var App = function (_React$Component) {
             if (todo.text.length === 0) {
                 alert('You must be doing something wrong:)');
             } else {
+                console.log(this.state.data);
                 this.state.data.push(todo);
                 this.setState({ data: this.state.data });
             }
@@ -18377,13 +18378,7 @@ var Title = function (_React$Component) {
                 _react2.default.createElement(
                     'h1',
                     null,
-                    'Reactive-To-Do-List'
-                ),
-                _react2.default.createElement(
-                    'h2',
-                    null,
-                    'Total:',
-                    this.props.count
+                    'Reactive-Blog'
                 )
             );
         }
@@ -18440,7 +18435,11 @@ var TaskList = function (_React$Component) {
             for (var i = 0; i < arr.length; i++) {
                 list.push(_react2.default.createElement(_Task2.default, { value: arr[i], handleClick: this.props.remove }));
             }
-            return list;
+            return _react2.default.createElement(
+                'div',
+                { className: 'taskList' },
+                list
+            );
         }
     }]);
 
@@ -18533,10 +18532,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Input = function (_React$Component) {
     _inherits(Input, _React$Component);
 
-    function Input() {
+    function Input(props) {
         _classCallCheck(this, Input);
 
-        return _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).call(this, props));
+
+        _this.state = {
+            showInput: 'none',
+            changeButton: 'Start'
+        };
+        _this.show = function () {
+            if (_this.state.showInput === 'none') {
+                _this.setState({ showInput: 'flex', changeButton: 'Finish' });
+            } else {
+                _this.setState({ showInput: 'none', changeButton: 'Start' });
+            }
+        };
+        return _this;
     }
 
     _createClass(Input, [{
@@ -18544,24 +18556,34 @@ var Input = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            var placeholders = ['Do Something', 'Be owesome', 'Dont waste your time', 'Shut up, and get it!', 'you are the superman!'];
-            var randomNumber = Math.abs(Math.ceil(Math.random() * 10 - 5));
+            var placeholders = ['Blogging is a conversation, not a code.', 'Blogging is like work, but without coworkers thwarting you at every turn.', 'A blog is only as interesting as the interest shown in others.', 'Blogging is just writing — writing using a particularly efficient type of publishing technology.'];
+            var randomNumber = Math.abs(Math.ceil(Math.random() * 10 - 6));
             var input = void 0;
 
             return _react2.default.createElement(
                 'div',
                 { className: 'input' },
-                _react2.default.createElement('input', { placeholder: placeholders[randomNumber],
-                    ref: function ref(node) {
-                        input = node;
-                    } }),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: this.show },
+                    this.state.changeButton,
+                    ' blogging'
+                ),
+                _react2.default.createElement(
+                    'textarea',
+                    { placeholder: placeholders[randomNumber],
+                        ref: function ref(node) {
+                            input = node;
+                        }, style: { display: this.state.showInput } },
+                    ' '
+                ),
                 _react2.default.createElement(
                     'button',
                     { onClick: function onClick() {
                             _this2.props.addTodo(input.value);
                             input.value = '';
-                        } },
-                    'Add Task'
+                        }, style: { display: this.state.showInput } },
+                    'Add'
                 )
             );
         }
@@ -18596,8 +18618,8 @@ var update = __webpack_require__(34)(content, options);
 if(content.locals) module.exports = content.locals;
 
 if(false) {
-	module.hot.accept("!!../node_modules/css-loader/index.js??ref--1-1!./index.css", function() {
-		var newContent = require("!!../node_modules/css-loader/index.js??ref--1-1!./index.css");
+	module.hot.accept("!!../node_modules/css-loader/index.js!./index.css", function() {
+		var newContent = require("!!../node_modules/css-loader/index.js!./index.css");
 
 		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 
@@ -18632,13 +18654,10 @@ exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Qui
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Inconsolata);", ""]);
 
 // module
-exports.push([module.i, "body {\n    font: 14px \"Century Gothic\", Futura, sans-serif;\n    margin: 20px;\n}\nh1, h2{\n    font-family: 'Inconsolata', monospace;\n}\n\nli {\n    width: 100%;\n    list-style-type: none;\n    padding: 20px 0 20px 0;\n    font-family: 'Quicksand', sans-serif;\n    font-size: 20px;\n    transition: 1s all;\n    border-radius: 10px;\n}\nli:hover {\n    background-color: blue;\n    color: aliceblue;\n}\n#ozFK-MtEtNjSjgYag7T2 {\n    display: flex;\n}\n._1acplgZZTUY2DpOaXZaPr6 {\n    display: flex;\n}\ntextarea {\n    height: 200px;\n    width: 300px;\n}\nbutton {\n    height: 26px;\n    align-self: center;\n}", ""]);
+exports.push([module.i, "body {\n    font: 14px \"Century Gothic\", Futura, sans-serif;\n    margin: 20px;\n}\nh1, h2{\n    font-family: 'Inconsolata', monospace;\n}\n\nli {\n    width: 100%;\n    list-style-type: none;\n    padding: 20px 0 20px 0;\n    font-family: 'Quicksand', sans-serif;\n    font-size: 20px;\n    transition: 1s all;\n    border-radius: 10px;\n}\nli:hover {\n    background-color: blue;\n    color: aliceblue;\n}\ntextarea {\n    height: 100px;\n    width: 500px;\n    font-size: 20px;\n}\nbutton {\n    height: 26px;\n    align-self: center;\n    font-size: 20px;\n}\n#root {\n}\n.taskList {\n    display: flex;\n    flex-direction: column;\n}\n", ""]);
 
 // exports
-exports.locals = {
-	"root": "ozFK-MtEtNjSjgYag7T2",
-	"input": "_1acplgZZTUY2DpOaXZaPr6"
-};
+
 
 /***/ }),
 /* 33 */

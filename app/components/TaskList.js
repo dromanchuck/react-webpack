@@ -8,7 +8,9 @@ class TaskList extends React.Component {
         for(let i = 0; i < arr.length; i++) {
             list.push(<Task value={arr[i]} handleClick={this.props.remove}/>);
         }
-        return list;
+        return (
+            <div className="taskList">{list}</div>
+        );
     }
 }
 export default TaskList;
