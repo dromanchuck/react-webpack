@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
 @import url('https://fonts.googleapis.com/css?family=Inconsolata');
+@import "/node_modules/react-notifications/lib/notifications.css";
+
 body {
     font: 14px "Century Gothic", Futura, sans-serif;
     margin: 20px;
@@ -8,7 +10,7 @@ h1, h2{
     font-family: 'Inconsolata', monospace;
 }
 
-li {
+.post {
     width: 100%;
     list-style-type: none;
     padding: 20px 0 20px 0;
@@ -17,7 +19,7 @@ li {
     transition: 1s all;
     border-radius: 10px;
 }
-li:hover {
+.post:hover {
     background-color: blue;
     color: aliceblue;
 }
@@ -31,9 +33,13 @@ button {
     align-self: center;
     font-size: 20px;
 }
-#root {
-}
 .taskList {
     display: flex;
     flex-direction: column;
+}
+.switch {
+    font-size:22px;
+}
+.input {
+    display: flex;
 }

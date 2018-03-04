@@ -1,3 +1,4 @@
+
 const path = require('path');
 
 module.exports = {
@@ -6,7 +7,6 @@ module.exports = {
          filename: 'bundle.js',
          path: path.resolve(__dirname, './public'),
          publicPath: '/public/',
-
      },
 
     module: {
@@ -28,6 +28,14 @@ module.exports = {
                 },{
                     loader:'css-loader',
                 }]
+            },
+            {
+                test: /\.svg$/,
+                loader: 'svg-loader'
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                loader: 'file-loader',
             }
         ]
     },

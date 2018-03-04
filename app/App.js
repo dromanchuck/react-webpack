@@ -1,49 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Title from './components/Title.js';
-import TaskList from './components/TaskList.js';
-import Input from './components/Input.js';
-import './index.css'
+import Creating from './Creating.js';
+import Bookmarks from './Bookmarks';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Title from "./components/Title";
+import Home from "./Home"
 
 
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data:[]
-        }
-    }
-    addTodo(val) {
-        let date = new Date();
-        let todo = {
-            text:val,
-            date: date.toLocaleString()
-        };
-        if(todo.text.length===0) {
-            alert('You must be doing something wrong:)');
-        } else {
-            console.log(this.state.data);
-            this.state.data.push(todo);
-            this.setState({data: this.state.data});
-        }
-    }
-    remove(val) {
-        let index = this.state.data.indexOf(val);
-        this.state.data.splice(index,1);
-        this.setState({data: this.state.data});
-    }
     render() {
         return (
             <div>
-                <Title count = {this.state.data.length}/>
-                <Input addTodo = {this.addTodo.bind(this)}/>
-                <TaskList value={this.state.data} remove={this.remove.bind(this)}/>
+                <Title/>
+                <Router>
+                    <div>
+                        <ul className="switch">
+                            <li>
+                                <Link to="./">Home</Link>
+                            </li>
+                            <li>
+                                <Link to="./Creating"> Create post </Link>
+                            </li>
+                            <li>
+                                <Link to="./Bookmarks">Bookmarks</Link>
+                            </li>
+                        </ul>
+                        <Route exact path="/" component={Home}/>
+                        <Route path="/Creating" component={Creating} />
+                        <Route path="/Bookmarks" component={Bookmarks}/>
+                    </div>
+                </Router>
             </div>
         )
     }
 }
-
 ReactDOM.render(
     <App/>,
     document.getElementById('root')
