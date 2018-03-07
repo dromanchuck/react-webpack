@@ -14,7 +14,8 @@ class Creating extends React.Component {
             let date = new Date();
             let todo = {
                 text:val,
-                date: date.toLocaleString()
+                date: date.toLocaleString(),
+                like:false
             };
             if(todo.text.length===0) {
                 alert('You must be doing something wrong:)');
@@ -30,12 +31,21 @@ class Creating extends React.Component {
             this.setState({data: this.state.data});
             NotificationManager.error('The post is deleted','Post deleting');
         };
+        this.changeLike = (val) => {
+            let index = this.state.data.indexOf(val);
+            let target = this.state.data[index].like;
+            if(!!target) {
+                this.state.data[index].like = false;
+            } else {
+                this.state.data[index].like = true;
+            }
+        }
     }
     render() {
         return (
             <div>
                 <Input addTodo = {this.addTodo}/>
-                <TaskList value={this.state.data} remove={this.remove}/>
+                <TaskList value={this.state.data} remove={this.remove} changeLike={this.changeLike}/>
                 <NotificationContainer/>
             </div>
         )

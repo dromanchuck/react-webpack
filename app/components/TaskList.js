@@ -2,14 +2,15 @@ import React from 'react';
 import Task from './Task.js'
 
 class TaskList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.showList = () => {
+            return this.props.value.map((item)=> <Task value={item} key={item.text} changeLike={this.props.changeLike} handleClick={this.props.remove}/>);
+        };
+    }
     render() {
-        const arr = this.props.value;
-        const list = [];
-        for(let i = 0; i < arr.length; i++) {
-            list.push(<Task value={arr[i]} handleClick={this.props.remove}/>);
-        }
         return (
-            <div className="taskList">{list}</div>
+            <div className="taskList">{this.showList()}</div>
         );
     }
 }
