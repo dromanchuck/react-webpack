@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Creating from './Creating.js';
-import Bookmarks from './Bookmarks';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Title from "./components/Title";
 import Home from "./Home"
-
 
 
 class App extends React.Component {
@@ -20,15 +18,11 @@ class App extends React.Component {
                                 <Link to="./">Home</Link>
                             </li>
                             <li>
-                                <Link to="./Creating"> Create post </Link>
-                            </li>
-                            <li>
-                                <Link to="./Bookmarks">Bookmarks</Link>
+                                <Link to="./creating"> Create post </Link>
                             </li>
                         </ul>
                         <Route exact path="/" component={Home}/>
-                        <Route path="/Creating" component={Creating} />
-                        <Route path="/Bookmarks" component={Bookmarks}/>
+                        <Route path="/creating" component={Creating} />
                     </div>
                 </Router>
             </div>

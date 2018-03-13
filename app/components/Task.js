@@ -1,12 +1,16 @@
 import React from 'react';
+import {Link } from "react-router-dom";
 
 class Task extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={()=>this.props.changeLike(this.props.value)} >like</button>
-                <button onClick={()=>this.props.handleClick(this.props.value)}>delete</button>
-                <li className='post'>{this.props.value.text} | Created {this.props.value.date}</li>
+                    <div>
+                        <button onClick={()=>this.props.handleClick(this.props.value)}>delete</button>
+                        <Link to={`./details`}>
+                            <li onClick={()=>this.props.get(this.props.value)} className='post'>{this.props.value.text} | Created {this.props.value.date}</li>
+                        </Link>
+                    </div>
             </div>
         );
     }
