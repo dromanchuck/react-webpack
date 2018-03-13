@@ -3,7 +3,8 @@ import TaskList from './components/TaskList.js';
 import Input from './components/Input.js';
 import './index.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import {Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import Details from "./Details";
 
 class Creating extends React.Component {
     constructor(props) {
@@ -69,26 +70,29 @@ class Creating extends React.Component {
         this.get = (val) => {
             let index = this.state.data.indexOf(val);
             this.state.selectedPost = this.state.data[index];
-            this.Detail(this.state.selectedPost);
+            console.log(this.state.selectedPost);
         };
     }
-    Detail(val) {
+
+    render() {
+        const PrivateComponent = () => {
+            return <TaskList value={this.state.data} remove={this.remove} get={this.get} select={this.state.selectedPost}/>
+        };
+        const secondPrivateComponent = () => {
+            return <Details val={this.state.selectedPost}/>;
+        };
             return (
                 <div>
-                    <h1>{val.text}
-                    </h1>
+                    <Input addTodo = {this.addTodo}/>
+                    <NotificationContainer/>
+                    <Router>
+                        <div>
+                            <Route path='/creating' component={PrivateComponent}/>
+                            <Route path='/details' component={secondPrivateComponent}/>
+                        </div>
+                    </Router>
                 </div>
-            );
-    }
-    render() {
-        return (
-            <div>
-                <Input addTodo = {this.addTodo}/>
-                <TaskList value={this.state.data} remove={this.remove} get={this.get} select={this.state.selectedPost}/>
-                <Route path='./details'/>
-                <NotificationContainer/>
-            </div>
-        )
-    }
+            )
+        };
 }
 export default Creating;
