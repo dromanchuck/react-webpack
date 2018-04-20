@@ -4,82 +4,44 @@ import Input from './components/Input.js';
 import './index.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import Details from "./Details";
+import Details from './Details';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {addPost} from './redux/modules/posts/postsActions';
 
 class Creating extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            data:[
-                {
-                    id:1,
-                    text:'akfnajsdfjansd',
-                    date:(new Date).toLocaleString(),
-                    like:true,
-                    author:'MickJagger',
-                    length:36
-                },
-                {
-                    id:2,
-                    text:'asdfasldkfnajsdfjansdfsdf',
-                    date:(new Date).toLocaleString(),
-                    like:true,
-                    author:'MickJagger',
-                    length:36
-                },{
-                    id:3,
-                    text:'asdfasdfjansd',
-                    date:(new Date).toLocaleString(),
-                    like:true,
-                    author:'MickJagger',
-                    length:36
-                },{
-                    id:4,
-                    text:'asddfjansd',
-                    date:(new Date).toLocaleString(),
-                    like:true,
-                    author:'MickJagger',
-                    length:36
-                }],
-            selectedPost:{}
+
+        this.handleAddPost = (item) => {
+            this.props.addPost(item);
         };
         this.addTodo = (val) => {
             let date = new Date();
             let todo = {
-                id:this.state.data.length+1,
+                id:this.props.posts.length+1,
                 text:val,
                 date: date.toLocaleString(),
                 like:false,
                 author:'Dmitry Romanchuk',
                 length:val.length
             };
+
             if(todo.text.length===0) {
                 alert('You must be doing something wrong:)');
             } else {
-                this.state.data.push(todo);
-                this.setState({data: this.state.data});
+                this.handleAddPost(todo);
                 NotificationManager.success('The post is created','Post creating');
             }
-        };
-        this.remove = (val) => {
-            let index = this.state.data.indexOf(val);
-            this.state.data.splice(index,1);
-            this.setState({data: this.state.data});
-            NotificationManager.error('The post is deleted','Post deleting');
-        };
-        this.get = (val) => {
-            let index = this.state.data.indexOf(val);
-            this.state.selectedPost = this.state.data[index];
-            console.log(this.state.selectedPost);
         };
     }
 
     render() {
         const PrivateComponent = () => {
-            return <TaskList value={this.state.data} remove={this.remove} get={this.get} select={this.state.selectedPost}/>
+            return <TaskList/>
         };
         const secondPrivateComponent = () => {
-            return <Details val={this.state.selectedPost}/>;
+            return <Details/>;
         };
             return (
                 <div>
@@ -95,4 +57,11 @@ class Creating extends React.Component {
             )
         };
 }
-export default Creating;
+
+const mapStateToProps = (state) => ({
+  posts: state.postsReducer.posts
+});
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    addPost
+},dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(Creating);

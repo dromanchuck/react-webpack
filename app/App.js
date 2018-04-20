@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import Creating from './Creating.js';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Title from "./components/Title";
-import Home from "./Home"
+import Home from "./Home";
+import {Provider} from 'react-redux';
+import store from './redux/store';
 
 
 class App extends React.Component {
     render() {
         return (
+            <Provider store={store}>
             <div>
                 <Title/>
                 <Router>
@@ -26,6 +29,7 @@ class App extends React.Component {
                     </div>
                 </Router>
             </div>
+            </Provider>
         )
     }
 }
