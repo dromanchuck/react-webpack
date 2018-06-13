@@ -1,13 +1,13 @@
 import React from 'react';
-import TaskList from './components/TaskList.js';
-import Input from './components/Input.js';
-import './index.css';
+import TaskList from '../components/TaskList.js';
+import Input from '../components/Input.js';
+import '../index.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Details from './Details';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {addPost} from './redux/modules/posts/postsActions';
+import {addPost} from '../redux/modules/posts/postsActions';
 
 class Creating extends React.Component {
     constructor(props) {
