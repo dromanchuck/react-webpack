@@ -61,7 +61,9 @@ class Creating extends React.Component {
 const mapStateToProps = (state) => ({
   posts: state.postsReducer.posts
 });
+
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     addPost
 },dispatch);
+
 export default connect(mapStateToProps, mapDispatchToProps)(Creating);
