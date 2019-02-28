@@ -43,7 +43,7 @@ class Creating extends Component {
             <div>
                 <Input addTodo = {this.addTodo}/>
                 <NotificationContainer/>
-                <Router basename={process.env.PUBLIC_URL}>
+                <Router basename={process.env.REACT_APP_PUBLIC_URL}>
                     <div>
                         <Route path='/creating' component={TaskList}/>
                         <Route path='/details' component={Details}/>
