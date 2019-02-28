@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import TaskList from '../components/TaskList.js';
 import Input from '../components/Input.js';
 import '../index.css';
@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {addPost} from '../redux/modules/posts/postsActions';
 
-class Creating extends React.Component {
+class Creating extends Component {
     constructor(props) {
         super(props);
 
@@ -19,7 +19,7 @@ class Creating extends React.Component {
         this.addTodo = (val) => {
             let date = new Date();
             let todo = {
-                id:this.props.posts.length+1,
+                id:this.props.posts.length + 1,
                 text:val,
                 date: date.toLocaleString(),
                 like:false,
@@ -27,9 +27,11 @@ class Creating extends React.Component {
                 length:val.length
             };
 
-            if(todo.text.length===0) {
+            if(todo.text.length ===0 ) {
                 alert('You must be doing something wrong:)');
-            } else {
+            } 
+            
+            if(todo.text.length !== 0) {
                 this.handleAddPost(todo);
                 NotificationManager.success('The post is created','Post creating');
             }
@@ -37,24 +39,18 @@ class Creating extends React.Component {
     }
 
     render() {
-        const PrivateComponent = () => {
-            return <TaskList/>
-        };
-        const secondPrivateComponent = () => {
-            return <Details/>;
-        };
-            return (
-                <div>
-                    <Input addTodo = {this.addTodo}/>
-                    <NotificationContainer/>
-                    <Router>
-                        <div>
-                            <Route path='/creating' component={PrivateComponent}/>
-                            <Route path='/details' component={secondPrivateComponent}/>
-                        </div>
-                    </Router>
-                </div>
-            )
+        return (
+            <div>
+                <Input addTodo = {this.addTodo}/>
+                <NotificationContainer/>
+                <Router basename={process.env.PUBLIC_URL}>
+                    <div>
+                        <Route path='/creating' component={TaskList}/>
+                        <Route path='/details' component={Details}/>
+                    </div>
+                </Router>
+            </div>
+        )
         };
 }
 
